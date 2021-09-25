@@ -1,1 +1,27 @@
+# Create a BlackJack game against ai, The player gets to choose how many ai players
+# try to create the program to just not generate a number but to actually get the type of card
+# The programs should be under 256 lines of code, so that they're small enough
+# for anyone to casually read and understand
+
+# input
+players = int(input("how many players do you want to play against ")) ## figure out a way to get input that is not invalid and will reask
+deck_size = ()
+
+while True:
+    deck_size = int(input("What deck size do you want it to be \n Standard: 1 \n 6 deck: 2 \n "))
+    try:
+        if deck_size == 1:
+            deck_size = 52
+        elif deck_size == 2:
+            deck_size = 52 * 6
+    except:
+        print("invalid input")
+        continue
+
+
+print(deck_size)
+# does player want to hit or stand
+# number generator from ace to king
+
+# ai
 
