@@ -83,7 +83,7 @@ suit_pick = random.sample(total_suits, k=1)
 print("I got a " + str(suit_pick[0]) + " " + str(v))
 # does player want to hit or stand
 
-# number generator from ace to king
+# number generator from ace to king1
 
 # ai
 
