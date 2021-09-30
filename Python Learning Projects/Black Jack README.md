@@ -1,0 +1,2 @@
+
+There is a lot more to work on to do my orignal goal and aim for the project. I lack skill to develop a program of what my aim is. I need to learn about more things like classes, dictionaries and a lot more but this project has motivated me to learn even more and is pushing me to know what I need for coding to get better. At this rate I will improve very well by end of next year and will be able to create even greater projects than I can imagine and improve this existing one to unreadable levels of current self.
