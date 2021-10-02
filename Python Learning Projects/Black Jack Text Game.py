@@ -10,7 +10,7 @@ clear = lambda: os.system('cls')  # this will clear the console as to show only 
 
 # input for how many players to play against
 while True:
-    players = input("how many players do you want to play against(Max players: 3) ")
+    players = input("how many players do you want to play against(Max players: 4) ")
     if players == 1:
         continue
     try:
@@ -64,26 +64,73 @@ else:
 
 
 # function to draw cards
-# assiging player hands
+# assigning player hands
+
+for i in range(5):
+    print("-----------------")
+    print("GAME IS STARTING")
+    print("-----------------")
+
 if players == 2:
-    player1_hand = []
+    player1_hand = []   # player1 hand is always players hand
+    player1_value = 0
     player2_hand = []
+    player2_value = 0
 elif players == 3:
     player1_hand = []
+    player1_value = 0
     player2_hand = []
+    player2_value = 0
     player3_hand = []
+    player3_value = 0
 elif players == 4:
     player1_hand = []
+    player1_value = 0
     player2_hand = []
+    player2_value = 0
     player3_hand = []
+    player3_value = 0
     player4_hand = []
+    player4_value = 0
 
-v = random.randint(1, 13)
-suit_pick = random.sample(total_suits, k=1)
-print("I got a " + str(suit_pick[0]) + " " + str(v))
-# does player want to hit or stand
+# Player hand generator
+while True:
+    i = 0
+    i = i + 1
+    # assigns cards and value to player hand
+    # generates a number from 1 to 13
+    while True:
+        v = random.randint(1, 13)
+# gets a sample from 312 or 52 deck size cards so that there are unique suits but have not found solution for unique num
+        suit_pick = random.sample(total_suits, k=1)
+        h = suit_pick[0] + " " + str(v)
+        # add whatever is drawn into a list
+        player1_hand.append(h)
+        print("I got a " + str(suit_pick[0]) + " " + str(v))
+        print(player1_hand)
+        # value of player hand
+        player1_value += v
+        print(player1_value)
+    # does player want to hit or stand
+        hit_stand = input("Do you want to hit or stand ")
+        if hit_stand == "Hit" or hit_stand.lower() == "hit" or player1_value >= 21:
+            if player1_value >= 21:
+                break
+            continue
+        elif hit_stand == "Stand" or hit_stand.lower() == "stand" or player1_value >= 21:
+            break
+        # checks value of players and too see if they have lost or won
+        if player1_value == 21:
+            break
+        elif player1_value > 21:
+            print("Player 1 has lost")
+        elif 21 >= player1_value > player2_value:
+            print("Player 1 has won")
+        elif player1_value == player2_value:
+            print("Its a draw")
 
-# number generator from ace to king1
+
+# number generator from ace to king
 
 # ai
 
