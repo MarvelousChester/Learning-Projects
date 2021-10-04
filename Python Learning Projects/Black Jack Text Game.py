@@ -71,6 +71,7 @@ for i in range(5):
     print("GAME IS STARTING")
     print("-----------------")
 
+clear()
 if players == 2:
     player1_hand = []   # player1 hand is always players hand
     player1_value = 0
@@ -95,43 +96,73 @@ elif players == 4:
 
 # Player hand generator
 while True:
-    i = 0
-    i = i + 1
+    # Most likey could use function instead of all these loops to do the same thing with fewer lines
+    # just don't know how. After Done program Redo this part as a function
     # assigns cards and value to player hand
-    # generates a number from 1 to 13
     while True:
-        v = random.randint(1, 13)
+
+        while True:
+            print("Player 1:")
+            v = random.randint(1, 13)
 # gets a sample from 312 or 52 deck size cards so that there are unique suits but have not found solution for unique num
-        suit_pick = random.sample(total_suits, k=1)
-        h = suit_pick[0] + " " + str(v)
-        # add whatever is drawn into a list
-        player1_hand.append(h)
-        print("I got a " + str(suit_pick[0]) + " " + str(v))
-        print(player1_hand)
-        # value of player hand
-        player1_value += v
-        print(player1_value)
-    # does player want to hit or stand
-        hit_stand = input("Do you want to hit or stand ")
-        if hit_stand == "Hit" or hit_stand.lower() == "hit" or player1_value >= 21:
-            if player1_value >= 21:
+            suit_pick = random.sample(total_suits, k=1)
+            h = suit_pick[0] + " " + str(v)
+            # add whatever is drawn into a list
+            player1_hand.append(h)
+            print(player1_hand)
+            # value of player hand
+            player1_value += v
+            print(player1_value)
+        # does player want to hit or stand
+            if player1_value <= 21:
+                hit_stand = input("Do you want to hit or stand ")
+            if hit_stand == "Hit" or hit_stand.lower() == "hit" or player1_value >= 21:
+                if player1_value >= 21:
+                    break
+                continue
+            elif hit_stand == "Stand" or hit_stand.lower() == "stand" or player1_value >= 21:
                 break
-            continue
-        elif hit_stand == "Stand" or hit_stand.lower() == "stand" or player1_value >= 21:
+        # PLAYER 2 LOOP
+        while True:
+            print("Player2 Turn")
+            v = random.randint(1, 13)
+# gets a sample from 312 or 52 deck size cards so that there are unique suits but have not found solution for unique num
+            suit_pick = random.sample(total_suits, k=1)
+            h = suit_pick[0] + " " + str(v)
+            # add whatever is drawn into a list
+            player2_hand.append(h)
+            print("I got a " + str(suit_pick[0]) + " " + str(v))
+            print(player2_hand)
+            # value of player hand
+            player2_value += v
+            print(player2_value)
+            # does player want to hit or stand
+            if player2_value <= 21:
+                hit_stand = input("Do you want to hit or stand ")
+            if hit_stand == "Hit" or hit_stand.lower() == "hit" or player2_value >= 21:
+                if player2_value >= 21:
+                    break
+                continue
+            elif hit_stand == "Stand" or hit_stand.lower() == "stand" or player2_value >= 21:
+                break
+
+        # checks to see value too see what player has won
+        if player1_value > 21 or player2_value > 21:
+            print("Nobody has won")
             break
-        # checks value of players and too see if they have lost or won
-        if player1_value == 21:
+        elif player1_value == 21 and player2_value < 21 or player2_value < player1_value < 21:
+            print("Player 1 Has won")
             break
-        elif player1_value > 21:
-            print("Player 1 has lost")
-        elif 21 >= player1_value > player2_value:
-            print("Player 1 has won")
         elif player1_value == player2_value:
             print("Its a draw")
-
+            break
+        elif player2_value == 21 and player1_value < 21 or player1_value < player2_value < 21:
+            print("Player 2 has won")
+            break
 
 # number generator from ace to king
-
+    print("Its done")
+    break
 # ai
 
 ## https://www.youtube.com/watch?v=KzqSDvzOFNA watch this video on RAndom Module
