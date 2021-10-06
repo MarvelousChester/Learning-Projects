@@ -9,8 +9,9 @@ import random
 clear = lambda: os.system('cls')  # this will clear the console as to show only one input , to call use clear()
 
 # input for how many players to play against
+# not needed code just there
 while True:
-    players = input("how many players do you want to play against(Max players: 4) ")
+    players = input("how many players do you want to play against(Max players: 2) ")
     if players == 1:
         continue
     try:
@@ -77,22 +78,6 @@ if players == 2:
     player1_value = 0
     player2_hand = []
     player2_value = 0
-elif players == 3:
-    player1_hand = []
-    player1_value = 0
-    player2_hand = []
-    player2_value = 0
-    player3_hand = []
-    player3_value = 0
-elif players == 4:
-    player1_hand = []
-    player1_value = 0
-    player2_hand = []
-    player2_value = 0
-    player3_hand = []
-    player3_value = 0
-    player4_hand = []
-    player4_value = 0
 
 # Player hand generator
 while True:
@@ -109,8 +94,9 @@ while True:
             h = suit_pick[0] + " " + str(v)
             # add whatever is drawn into a list
             player1_hand.append(h)
+            print("PLayer Hand: ")
             for i in range(len(player1_hand)):
-                print("PLayer Hand: " + player1_hand[i], end=' ')
+                print (player1_hand[i], end=' ')
             # value of player hand
             print(end="\n")
             player1_value += v
@@ -129,6 +115,9 @@ while True:
         print(player1_hand, player1_value)
         # PLAYER 2 LOOP
         while True:
+            if player1_value > 21:
+                print("Player 2 has won!")
+                break
             print("Player 2:")
             v = random.randint(1, 13)
 # gets a sample from 312 or 52 deck size cards so that there are unique suits but have not found solution for unique num
@@ -136,8 +125,9 @@ while True:
             h = suit_pick[0] + " " + str(v)
             # add whatever is drawn into a list
             player2_hand.append(h)
+            print("PLayer Hand: ")
             for i in range(len(player2_hand)):
-                print("PLayer Hand: " + player2_hand[i], end=' ')
+                print(player2_hand[i], end=' ')
             # value of player hand
             print(end="\n")
             player2_value += v
@@ -157,17 +147,17 @@ while True:
             print("Nobody has won")
             break
         elif player1_value == 21 and player2_value < 21 or player2_value < player1_value < 21:
-            print("Player 1 Has won")
+            print("Player 1 Has won!")
             break
         elif player1_value == player2_value:
             print("Its a draw")
             break
-        elif player2_value == 21 and player1_value < 21 or player1_value < player2_value < 21:
-            print("Player 2 has won")
+        elif player2_value == 21 and player1_value < 21 or player1_value < player2_value < 21 or player1_value > 21:
+            print("Player 2 has won!")
             break
 
-    print("Its done")
+
     break
 # Place Holder
 print(input())
-## https://www.youtube.com/watch?v=KzqSDvzOFNA watch this video on RAndom Module
+
