@@ -1,12 +1,15 @@
-# Using this as way to note what the code is and understanding how to use classes and functions and change it around and add features like betting
+# Using this as way to note what the code is and understanding how to use classes and functions
 # https://www.askpython.com/python/examples/blackjack-game-using-python
 # code credited the person in link above
+# did my method for dealing cards but problem lies where I can't show hidden card
+# Dealing should be first then hit and stand phase but I don't have much to learn now with this project as its a tedious
+# fix the issue but it would be to not to use loops and manually repeat the cards.
 import random
 
 
 def print_cards(cards, hidden):
     s = ""
-    for card in cards:
+    for i in cards:
         # \t: means tab
         s = s + "\t ________________"  # creates lines horizontally
 
@@ -15,23 +18,23 @@ def print_cards(cards, hidden):
     print(s)
 
     s = ""
-    for card in cards:
-        if card.value == 10:  # asking if 10 ask if it is that will mean the tab will moved one space extra
-            s = s + "\t| {}             |".format(card.value)  # format will replace the {} with whatever card.value is
+    for i in cards:
+        if i.value == 10:  # asking if 10 ask if it is that will mean the tab will moved one space extra
+            s = s + "\t| {}             |".format(i.value)  # format will replace the {} with whatever card.value is
 
         else:
-            s = s + "\t| {}              |".format(card.value)
+            s = s + "\t| {}              |".format(i.value)
 
     if hidden:
         s = s + "\t|                |"
     print(s)
 
+    s = ""
     for i in cards:
-        s = ""
         s = s + "\t|                |"
         if hidden:
             s = s + "\t|                |"
-        print(s)
+    print(s)
     s = ""
     for i in cards:
         s = s + "\t|       {}        |".format(i.suit)
@@ -48,14 +51,14 @@ def print_cards(cards, hidden):
 
     s = ""
     for i in cards:
-        if card.value == 10:
+        if i.value == 10:
             s = s + "\t|             {} |".format(i.value)
         else:
             s = s + "\t|              {} |".format(i.value)  # gets the value inside the class
 
         if hidden:
             s = s + "\t|                |"
-        print(s)
+    print(s)
 
     s = ""
     for i in cards:
@@ -78,7 +81,7 @@ class Card:
 suits = ["Spades", "Hearts", "Diamonds", "Clubs"]
 
 # suit character
-suit_character = {"Spades": "♤", "Hearts": "♥", "Diamonds": "⬥", "Clubs": "♧"}
+suit_character = {"Spades": "♠", "Hearts": "♥", "Diamonds": "⬥", "Clubs": "♧"}
 
 # declaring playing cards
 playing_cards = ["Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King"]
@@ -101,42 +104,59 @@ print()
 # Hands
 def black_jack(deck):
     # player hand
-    dealer_hand = []
+
     player_hand = []
 
     # player hand value
-    dealer_value = 0
+
     player_value = 0
 
     win = 0
     # Dealing
-    while win == 0:
-        
+
+    while True:
         # Players Turn
         card_pick = random.choice(deck)
         player_hand.append(card_pick)
-        print("Player Hand:")
+
+        # Giving card value to hand
+        player_value = player_value + card_pick.value
+
+        # printing cards
+        print("Player Hand: ", player_value)
         print_cards(player_hand, False)
 
         # Removing that card from List
         deck.remove(card_pick)
 
-        # Giving card value to hand
-        player_value = player_value + card_pick.value
-
         # Ace Card
-        if len(player_hand) == 2: # Checks if player has 2 cards to decide what ace will be
+        if len(player_hand) == 2:  # Checks if player has 2 cards to decide what ace will be
             if player_hand[0] == 11 and player_hand[1]:
                 player_hand[0] = 1
                 player_hand[1] -= 10
 
-
         # Hit or stand
-        if len(player_hand) == 2:
+        if len(player_hand) >= 2:
+            if player_value >= 21:
+                break
             hit_stand = input("Would you like to hit or stand? ")
-            if hit_stand == "stand" or player_value == 21:
-                
+            if hit_stand.lower() == "stand":
+                break
+            else:
+                continue
 
+    # Dealer hand and value
+    dealer_hand = []
+    dealer_value = 0
+
+    while True:
+        # checks if player has hit more than 21
+        if player_value > 21:
+            print("Dealer Wins")
+            win = 1
+            break
+        elif player_value == 21:
+            print("Player BlackJack!")
         # Dealers hand
         card_pick = random.choice(deck)
         dealer_hand.append(card_pick)
@@ -145,13 +165,27 @@ def black_jack(deck):
         print_cards(dealer_hand, False)  # True means that it will show second card as unknown/ hide it
         print(dealer_value)
 
-        if player_value == 21 or dealer_value < player_value < 21 and player_value:
-            win = win + 1
+        # Ace Card
+        if len(dealer_hand) == 2:  # Checks if player has 2 cards to decide what ace will be
+            if dealer_hand[0] == 11 and dealer_hand[1]:
+                dealer_hand[0] = 1
+                dealer_hand[1] -= 10
 
+        if dealer_value < 17:
+            continue
+        else:
+            break
+    # checks if dealer value is greater than player value and less than 21
+    if win != 1:
+        if player_value < dealer_value <= 21 or player_value > 21 > dealer_value:
+            print("Player has lost")
+        elif dealer_value < player_value <= 21 or dealer_value > 21 > player_value:
+            print("Player has won")
+        else:
+            print("Draw")
 
 
 # Check Win or Loss
-
 black_jack(deck)
-# add betting to game
-# Winning and losing    
+input()
+
